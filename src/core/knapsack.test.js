@@ -1,5 +1,6 @@
 import { range } from 'lodash'
 import { mpx } from './mpx'
+import { spx } from './spx'
 import { sample } from './sample'
 import { knapsack } from './knapsack'
 
@@ -48,6 +49,6 @@ test('knapsack must works correctly', () => {
     event_cb: (foo) => {
       console.log(foo)
     },
-    mutation: mpx
+    mutation: spx
   })
 })
