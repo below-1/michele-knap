@@ -1,6 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffe } from '@fortawesome/free-solid-svg-icons/faCoffee'
 import { faTable } from '@fortawesome/free-solid-svg-icons/faTable'
+import { faTasks } from '@fortawesome/free-solid-svg-icons/faTasks'
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { faDatabase } from '@fortawesome/free-solid-svg-icons/faDatabase'
 import { faVials } from '@fortawesome/free-solid-svg-icons/faVials'
 import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers'
@@ -12,7 +13,6 @@ import { faPlayCircle } from '@fortawesome/free-solid-svg-icons/faPlayCircle'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons/faWindowClose'
 
 library.add(
-    faCoffee, 
     faTable, 
     faDatabase,
     faVials,
