@@ -1,0 +1,63 @@
+@import "./tailwind.pcss";
+
+@font-face {
+  font-family: "cairo";
+  src: url(/fonts/cairo/Cairo-Regular.ttf);
+}
+
+
+@font-face {
+  font-weight: bold;
+  font-family: "cairo";
+  src: url(/fonts/cairo/Cairo-Bold.ttf);
+}
+
+
+@font-face {
+  font-family: "fredoka";
+  src: url(/fonts/fredoka_one/FredokaOne-Regular.ttf);
+}
+
+:root {
+  --hero-layer: rgba(0, 0, 0, 0.6);
+  --navbar-height: 52px;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.fredoka {
+  font-family: fredoka;
+}
+
+#app {
+  font-family: "cairo";
+}
+
+
+#landing {
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+#landing > .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#landing > .content {
+  height: 100vh;
+}
+
+#landing .hero {
+  background:
+    linear-gradient(to bottom, var(--hero-layer), var(--hero-layer)),
+    url(/hero.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
