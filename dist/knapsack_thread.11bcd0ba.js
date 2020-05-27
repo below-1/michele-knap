@@ -27236,6 +27236,7 @@ function knapsack(_ref4) {
       max_gen = hyper.max_gen,
       prob_mutation = hyper.prob_mutation,
       convergence_threshold = hyper.convergence_threshold,
+      use_convergence_threshold = hyper.use_convergence_threshold,
       tournament_size = hyper.tournament_size;
   var gen_counter = 0;
   var dim = items.length;
@@ -27280,7 +27281,7 @@ function knapsack(_ref4) {
       }
     });
 
-    if (conv_ratio >= convergence_threshold) {
+    if (use_convergence_threshold && conv_ratio >= convergence_threshold) {
       return "break";
     }
 

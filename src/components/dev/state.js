@@ -13,7 +13,8 @@ export default {
     pop_size: 100,
     prob_crossover: 0.3,
     prob_mutation: 0.01,
-    max_weight: 15
+    max_weight: 15,
+    use_convergence_threshold: true
   },
   knapsack_events: []
 }

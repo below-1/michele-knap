@@ -12,13 +12,13 @@ export default function Dev () {
       <div id="dev" className="pt-16">
         <Toolbar />
         <section className="my-4 mx-6">
-          <div className="flex">
-            <div className="text-gray-700 w-1/3">
+          <div className="flex flex-row -mx-2">
+            <div className="text-gray-700 w-1/3 px-2">
               <InputItems></InputItems>
               <InputHyper></InputHyper>
             </div>
 
-            <div className="w-2/3">
+            <div className="w-2/3 px-2">
               <Result />
             </div>
           </div>

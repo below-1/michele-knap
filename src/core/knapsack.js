@@ -87,6 +87,7 @@ export function knapsack ({
         max_gen,
         prob_mutation,
         convergence_threshold,
+        use_convergence_threshold,
         tournament_size
     } = hyper;
     let gen_counter = 0;
@@ -117,7 +118,7 @@ export function knapsack ({
             }
         })
 
-        if (conv_ratio >= convergence_threshold) {
+        if (use_convergence_threshold && conv_ratio >= convergence_threshold) {
             break;
         }
 
