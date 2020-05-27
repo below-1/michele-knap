@@ -118,5 +118,10 @@ export function knapsack ({ items, hyper, event_cb, mutation }) {
     gen_counter += 1
   }
 
+  if (event_cb) {
+    event_cb({
+      type: 'end'
+    })
+  }
   return population
 }

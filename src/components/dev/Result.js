@@ -4,48 +4,93 @@ import InputContext from './InputContext'
 
 export default function Result () {
   const [state, _] = useContext(InputContext)
-  const { knapsack_events: events } = state
-  const dataPoints = events.map((event, index) => {
-    return {
-      x: index,
-      y: event.payload.conv_ratio
-    }
+  const { knapsack_convs: events } = state
+
+  let spxConvRatios = []
+  let spxMaxFits = []
+  events.filter(ev => ev.name == 'spx').forEach((ev, index) => {
+    spxConvRatios.push({ x: index, y: ev.payload.conv_ratio })
+    spxMaxFits.push({ x: index, y: ev.payload.max_fit })
   })
-  const data = [
+
+  const spxData = [
     {
-      id: "japan",
-      color: "hsl(130, 70%, 50%)",
-      data: dataPoints
+      id: "convergence_ratio",
+      data: spxConvRatios
     }
   ]
+
+  let mpxConvRatios = []
+  let mpxMaxFits = []
+  events.filter(ev => ev.name == 'mpx').forEach((ev, index) => {
+    mpxConvRatios.push({ x: index, y: ev.payload.conv_ratio })
+    mpxMaxFits.push({ x: index, y: ev.payload.max_fit })
+  })
+
+  const mpxData = [
+    {
+      id: "convergence_ratio",
+      data: mpxConvRatios
+    }
+  ]
+
   return (
-    <div className="text-lg p-4 text-center border border-gray-300">
-      <div style={{ height: '400px' }}>
-        <ResponsiveLineCanvas
-          data={data}
-          margin={{ top: 4, right: 26, bottom: 28, left: 20 }}
-          xScale={{ type: 'linear' }}
-          yScale={{ type: 'linear', stacked: true, min: 0, max: 1.0 }}
-          curve="monotoneX"
-          enableArea={true}
-          axisLeft={{
-            tickValues: [
-                0,
-                0.5,
-                1
-            ],
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'convergence ratio',
-            legendOffset: 0
-          }}
-          axisBottom={{
-            legend: 'generation',
-            legendOffset: 12,
-            legendPosition: 'middle'
-          }}
-        />
+    <div className="text-lg text-center">
+      <div className="mb-8 p-4 border border-gray-300">
+        <div className="text-xl font-bold text-center">Multiple Point Crossover MPX</div>
+        <div style={{ height: '400px' }}>
+          <ResponsiveLineCanvas
+            data={spxData}
+            margin={{ top: 28, right: 26, bottom: 28, left: 26 }}
+            xScale={{ type: 'linear' }}
+            yScale={{ type: 'linear' }}
+            axisLeft={{
+              tickValues: [
+                  0,
+                  0.5,
+                  1
+              ],
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: 'convergence ratio',
+              legendOffset: 4
+            }}
+            axisBottom={{
+              legend: 'generation',
+              legendOffset: 12,
+              legendPosition: 'middle'
+            }}
+          />
+        </div>
+      </div>
+      <div className="mb-8 p-4 border border-gray-300">
+        <div className="text-xl font-bold text-center">Single Point Crossover SPX</div>
+        <div style={{ height: '400px' }}>
+          <ResponsiveLineCanvas
+            data={mpxData}
+            margin={{ top: 28, right: 26, bottom: 28, left: 26 }}
+            xScale={{ type: 'linear' }}
+            yScale={{ type: 'linear' }}
+            axisLeft={{
+              tickValues: [
+                  0,
+                  0.5,
+                  1
+              ],
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: 'convergence ratio',
+              legendOffset: 4
+            }}
+            axisBottom={{
+              legend: 'generation',
+              legendOffset: 12,
+              legendPosition: 'middle'
+            }}
+          />
+        </div>
       </div>
     </div>
   )

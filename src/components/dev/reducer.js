@@ -28,10 +28,10 @@ export default function Reducer (state, action) {
         ...state,
         hyper: action.payload
       }
-    case 'KNAPSACK_EVENT':
+    case 'KP_GEN':
       return {
         ...state,
-        knapsack_events: [...state.knapsack_events, action.payload]
+        knapsack_convs: [...state.knapsack_convs, action.payload]
       }
     default:
       return state;

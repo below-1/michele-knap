@@ -1,17 +1,13 @@
 import { knapsack } from './knapsack'
-import { mpx } from './mpx'
+import { spx } from './spx'
 
-function event_cb (event) {
-  postMessage(event)
-}
-
-onmessage = function (event) {
+onmessage = (event) => {
   switch (event.data.type) {
     case 'start':
       knapsack({
         ...event.data.payload,
-        event_cb,
-        mutation: mpx
+        event_cb: postMessage,
+        mutation: spx
       })
       break
     default:

@@ -11,15 +11,22 @@ export default function Toolbar () {
   const [ observable, setObservable ] = useState(null)
 
   useEffect(() => {
-    const knapWorker = new Worker('../../core/knapsack_thread.js')
+    const knapWorker = new Worker('../../core/knapsack_t_adapter.js')
 
     knapWorker.onmessage = worker_event => {
-      console.log('got worker event')
-      console.log(worker_event.data)
-      dispatch({
-        type: 'KNAPSACK_EVENT',
-        payload: worker_event.data
-      })
+      switch (worker_event.data.type) {
+        case 'generation':
+          dispatch({
+            type: 'KP_GEN',
+            payload: worker_event.data
+          })
+          break
+        case 'end':
+          console.log('ending')
+          break
+        default:
+          break
+      }
     }
 
     knapWorker.onerror = err => {
