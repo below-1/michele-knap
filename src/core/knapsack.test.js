@@ -1,5 +1,7 @@
 import { range } from 'lodash'
-const knap = require('./knapsack')
+import { mpx } from './mpx'
+import { sample } from './sample'
+import { knapsack } from './knapsack'
 
 test('sample must works correctly', () => {
   const all = [
@@ -14,7 +16,7 @@ test('sample must works correctly', () => {
     97, 98, 99
   ]
   const take = 2
-  const result = knap.sample(all, take)
+  const result = sample(all, take)
   expect(result.length).toBe(take)
   result.forEach(it => {
     expect(all.includes(it)).toBe(true)
@@ -40,9 +42,12 @@ test('knapsack must works correctly', () => {
     use_convergence_threshold: true
   }
 
-  const result = knap.knapsack({
+  const result = knapsack({
     items,
     hyper,
-    event_cb: (foo) => {}
+    event_cb: (foo) => {
+      console.log(foo)
+    },
+    mutation: mpx
   })
 })
