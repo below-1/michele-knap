@@ -20,7 +20,7 @@ export default {
     prob_crossover: 0.3,
     prob_mutation: 0.01,
     max_weight: 250,
-    use_convergence_threshold: false
+    use_convergence_threshold: true
   },
   // Info convergence per gen
   knapsack_convs: []
