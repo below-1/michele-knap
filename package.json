@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx parcel public/index.html",
     "build": "npx parcel build public/index.html --no-cache --experimental-scope-hoisting",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +32,8 @@
     "@babel/core": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@fullhuman/postcss-purgecss": "^2.2.0",
-    "babel-plugin-transform-class-properties": "^6.24.1"
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "jest": "^26.0.1"
   },
   "alias": {
     "mich": "./src"
