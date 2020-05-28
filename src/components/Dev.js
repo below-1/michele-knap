@@ -1,7 +1,7 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom'
 import Store from './dev/Store'
-import InputItems from './dev/InputItems'
-import InputHyper from './dev/InputHyper'
+import MainInput from './dev/MainInput'
 import Result from './dev/Result'
 import Toolbar from './dev/Toolbar'
 import './Dev.css'
@@ -12,16 +12,14 @@ export default function Dev () {
       <div id="dev" className="pt-16">
         <Toolbar />
         <section className="my-4 mx-6">
-          <div className="flex flex-row -mx-2">
-            <div className="text-gray-700 w-1/3 px-2">
-              <InputItems></InputItems>
-              <InputHyper></InputHyper>
-            </div>
-
-            <div className="w-2/3 px-2">
+          <Switch>
+            <Route exact path="/dev/input">
+              <MainInput />
+            </Route>
+            <Route exact path="/dev/result">
               <Result />
-            </div>
-          </div>
+            </Route>
+          </Switch>
         </section>
       </div>
     </Store>

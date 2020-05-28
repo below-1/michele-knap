@@ -52,7 +52,12 @@ function mutate ({ population, dim, pop_size, prob_mutation }) {
   return n
 }
 
-export function knapsack ({ items, hyper, event_cb, mutation }) {
+export function knapsack ({ items, hyper, mutation }) {
+  let result = {
+    generations: [],
+    max_chromosome: null
+  }
+
   const {
     pop_size,
     max_weight,
@@ -80,18 +85,13 @@ export function knapsack ({ items, hyper, event_cb, mutation }) {
     let [max_fit, count] = convergence({ masked })
     const conv_ratio = (1.0 * count) / pop_size;
 
-        // console.log(`max common conv: ${max_fit}, count: ${count}`)
-        // console.log(`conv_ratio: ${conv_ratio}`)
-    if (event_cb) {
-      event_cb({
-        type: 'generation',
-        payload: {
-          max_fit,
-          generation: gen_counter,
-          conv_ratio
-        }
-      })
-    }
+    // console.log(`max common conv: ${max_fit}, count: ${count}`)
+    // console.log(`conv_ratio: ${conv_ratio}`)
+    result.generations.push({
+      max_fit,
+      generation: gen_counter,
+      conv_ratio
+    })
 
     if (use_convergence_threshold && conv_ratio >= convergence_threshold) {
       break;
@@ -115,13 +115,10 @@ export function knapsack ({ items, hyper, event_cb, mutation }) {
       population[i] = [...population[max_index]]
     })
 
+    result.max_chromosome = max_chromosome
+
     gen_counter += 1
   }
 
-  if (event_cb) {
-    event_cb({
-      type: 'end'
-    })
-  }
-  return population
+  return result
 }

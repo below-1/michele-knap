@@ -4,10 +4,15 @@ import { mpx } from './mpx'
 onmessage = (event) => {
   switch (event.data.type) {
     case 'start':
-      knapsack({
+      // console.log('here')
+      const result = knapsack({
         ...event.data.payload,
-        event_cb: postMessage,
         mutation: mpx
+      })
+      // console.log(result)
+      postMessage({
+        type: 'end',
+        ...result
       })
       break
     default:

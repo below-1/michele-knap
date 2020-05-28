@@ -4,10 +4,13 @@ import { spx } from './spx'
 onmessage = (event) => {
   switch (event.data.type) {
     case 'start':
-      knapsack({
+      const result = knapsack({
         ...event.data.payload,
-        event_cb: postMessage,
         mutation: spx
+      })
+      postMessage({
+        type: 'end',
+        ...result
       })
       break
     default:

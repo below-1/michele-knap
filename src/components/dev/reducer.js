@@ -18,7 +18,7 @@ export default function Reducer (state, action) {
             return {
               ...item,
               ...action.payload.item
-            }       
+            }
           }
           return item
         })
@@ -32,6 +32,11 @@ export default function Reducer (state, action) {
       return {
         ...state,
         knapsack_convs: [...state.knapsack_convs, action.payload]
+      }
+    case 'NEW_KNAP_RESULT':
+      return {
+        ...state,
+        knap_results: [...state.knap_results, action.payload]
       }
     default:
       return state;

@@ -169,9 +169,9 @@ function Toggler ({ show, toggle }) {
 }
 
 export default function InputHyper () {
-  const [ showParams, setShowParams ] = useState(false)
+  const [ showParams, setShowParams ] = useState(true)
   return (
-    <div className="py-4 border border-gray-300 mt-2">
+    <div className="py-4 border border-gray-300">
       <Toggler
         show={showParams}
         toggle={() => setShowParams(!showParams)}

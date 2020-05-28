@@ -165,7 +165,7 @@ function Toggler ({ show, toggle }) {
 }
 
 export default function InputItems () {
-  const [ showItems, setShowItems ] = useState(false)
+  const [ showItems, setShowItems ] = useState(true)
   const [ showCreateItem, setShowCreateItem ] = useState(false)
   const [ updateIndex, setUpdateIndex ] = useState(-1)
   return (
