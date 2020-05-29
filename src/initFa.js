@@ -11,6 +11,9 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown'
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons/faCaretLeft'
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons/faPlayCircle'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons/faWindowClose'
+import { faCoins } from '@fortawesome/free-solid-svg-icons/faCoins'
+import { faWeightHanging } from '@fortawesome/free-solid-svg-icons/faWeightHanging'
+import { faHourglass } from '@fortawesome/free-solid-svg-icons/faHourglass'
 
 library.add(
     faTable, 
@@ -24,5 +27,8 @@ library.add(
     faCaretDown,
     faCaretLeft,
     faPlayCircle,
-    faWindowClose
+    faWindowClose,
+    faCoins,
+    faWeightHanging,
+    faHourglass
 )

@@ -1,68 +1,66 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useHistory } from 'react-router-dom'
 import Logo from 'mich/icons/abstract.svg'
-import InputContext from './InputContext'
+import InputContext from 'mich/components/dev/InputContext'
+import useKnapsack from 'mich/hooks/knapsack'
 
 
 export default function Toolbar () {
-  const [ state, dispatch ] = useContext(InputContext)
-  const [ worker, setWorker ] = useState(null)
-  const [algoCompleteCounter, setAlgoCompleteCounter] = useState(0)
+  const [state, dispatch] = useContext(InputContext)
   const history = useHistory()
 
-  const incAlgoCounter = () => {
-    setAlgoCompleteCounter(algoCompleteCounter + 1)
-  }
+  const { knapsack, done, workerState } = useKnapsack(data => {
+    if (!data) return
+    switch (data.type) {
+      case 'end':
+        dispatch({
+          type: 'NEW_KNAP_RESULT',
+          payload: data
+        })
+        break
+      default:
+        break
+    }
+  })
 
   useEffect(() => {
-    console.log(`algoCompleteCounter: ${algoCompleteCounter}`)
-    if (algoCompleteCounter == 2) {
+    if (workerState == 'done') {
       history.push('/dev/result')
     }
-  }, [algoCompleteCounter])
+  }, [workerState])
 
-  useEffect(() => {
-    const knapWorker = new Worker('../../core/knapsack_t_adapter.js')
-
-    knapWorker.onmessage = worker_event => {
-      switch (worker_event.data.type) {
-        case 'end':
-          dispatch({
-            type: 'NEW_KNAP_RESULT',
-            payload: worker_event.data
-          })
-          break
-        default:
-          break
-      }
-    }
-
-    knapWorker.onerror = err => {
-      throw err
-    }
-
-    setWorker(knapWorker)
-
-    return function cleanUpWorker () {
-      if (knapWorker) {
-        knapWorker.terminate()
-      }
-    }
-  }, [])
-
-  function onRun () {
-    if (worker == null) {
-      return
-    }
-
-    worker.postMessage({
-      type: 'start',
-      payload: {
-        items: state.items,
-        hyper: state.hyper
-      }
-    })
+  let button;
+  if (workerState == 'loaded' || workerState == 'load_script' || workerState == 'running') {
+    button = (<FontAwesomeIcon icon="hourglass" />)
+  } else if (workerState == 'ready') {
+    button = (<button 
+      className="appearance-none bg-indigo-700 text-white px-4 py-1 text-lg font-bold rounded"
+      onClick={() => {
+        dispatch({
+          type: 'CLEAR_KNAP_RESULT'
+        })
+        knapsack(state.items, state.hyper)
+      }}
+    >
+      Run!
+      <FontAwesomeIcon icon="play-circle" size="lg" className="ml-2"></FontAwesomeIcon>
+    </button>)
+  } else if (workerState == 'done') {
+    button = (<button 
+      className="appearance-none bg-indigo-700 text-white px-4 py-1 text-lg font-bold rounded"
+      onClick={() => {
+        dispatch({
+          type: 'CLEAR_KNAP_RESULT'
+        })
+        knapsack(state.items, state.hyper)
+      }}
+    >
+      Reload
+      <FontAwesomeIcon icon="play-circle" size="lg" className="ml-2"></FontAwesomeIcon>
+    </button>)
+  } else {
+    button = (<div>{workerState}</div>)
   }
 
   return (
@@ -73,13 +71,7 @@ export default function Toolbar () {
       </div>
       <div className="flex flex-grow flex-row justify-end items-center">
         <Link className="px-6 font-bold" to='/about'>About</Link>
-        <button 
-          className="appearance-none bg-indigo-700 text-white px-4 py-1 text-lg font-bold rounded"
-          onClick={onRun}
-        >
-          Run!
-          <FontAwesomeIcon icon="play-circle" size="lg" className="ml-2"></FontAwesomeIcon>
-        </button>
+        {button}
       </div>
     </div>
   )

@@ -55,7 +55,9 @@ function mutate ({ population, dim, pop_size, prob_mutation }) {
 export function knapsack ({ items, hyper, mutation }) {
   let result = {
     generations: [],
-    max_chromosome: null
+    max_chromosome: null,
+    best_fit: 0,
+    best_weight: 0
   }
 
   const {
@@ -116,6 +118,8 @@ export function knapsack ({ items, hyper, mutation }) {
     })
 
     result.max_chromosome = max_chromosome
+    result.best_fit = masked[max_chromosome_index].tprofit
+    result.best_weight = masked[max_chromosome_index].total
 
     gen_counter += 1
   }

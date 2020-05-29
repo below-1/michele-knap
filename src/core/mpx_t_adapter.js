@@ -5,14 +5,17 @@ onmessage = (event) => {
   switch (event.data.type) {
     case 'start':
       // console.log('here')
+      const t0 = performance.now()
       const result = knapsack({
         ...event.data.payload,
         mutation: mpx
       })
+      const t1 = performance.now()
       // console.log(result)
       postMessage({
         type: 'end',
-        ...result
+        ...result,
+        time: t1 - t0
       })
       break
     default:

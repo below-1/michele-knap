@@ -38,6 +38,11 @@ export default function Reducer (state, action) {
         ...state,
         knap_results: [...state.knap_results, action.payload]
       }
+    case 'CLEAR_KNAP_RESULT':
+      return {
+        ...state,
+        knap_results: []
+      }
     default:
       return state;
   }
