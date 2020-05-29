@@ -15,11 +15,11 @@ export default {
   hyper: {
     max_gen: 1000,
     tournament_size: 10,
-    convergence_threshold: 0.95,
+    convergence_threshold: 0.8,
     pop_size: 100,
-    prob_crossover: 0.2,
-    prob_mutation: 0.9,
-    max_weight: 300,
+    prob_crossover: 0.6,
+    prob_mutation: 0.4,
+    max_weight: 600,
     use_convergence_threshold: true
   },
   // Info convergence per gen

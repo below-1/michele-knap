@@ -83,7 +83,7 @@ export function knapsack ({ items, hyper, mutation }) {
   }).sort(it => it.t).reverse()
 
   while (gen_counter < max_gen) {
-    const masked = mask({ population, ordered, max_weight, dim })
+    let masked = mask({ population, ordered, max_weight, dim })
     let [max_fit, count] = convergence({ masked })
     const conv_ratio = (1.0 * count) / pop_size;
 
@@ -95,22 +95,30 @@ export function knapsack ({ items, hyper, mutation }) {
       conv_ratio
     })
 
+    // Stoping condition
     if (use_convergence_threshold && conv_ratio >= convergence_threshold) {
       break;
     }
 
 
+    // Crossover
     const crossover_pool = population.filter(pop => Math.random() < prob_crossover)
     mutation(crossover_pool, dim)
-    const n_mutate = mutate({ population, dim, pop_size, prob_mutation })
+
+    // Mutaation
+    mutate({ population, dim, pop_size, prob_mutation })
 
     const max_chromosome = maxBy(masked, it => it.tprofit)
     const min_chromosome = minBy(masked, it => it.tprofit)
     const max_chromosome_index = masked.indexOf(max_chromosome)
     const min_chromosome_index = masked.indexOf(min_chromosome)
 
+    // Elitisme
     population[min_chromosome_index] = [ ...population[max_chromosome_index] ]
+
+    // Tournament
     const tour_indices = range(pop_size).filter(i => i != min_chromosome_index)
+    // masked = mask({ population, ordered, max_weight, dim })
     tour_indices.forEach(i => {
       const pool = sample(tour_indices, tournament_size)
       const max_index = maxBy(pool, index => masked[index].tprofit)
