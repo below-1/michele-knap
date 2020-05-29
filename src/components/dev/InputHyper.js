@@ -119,6 +119,23 @@ function ContentForm ({ id, submit }) {
         <div className="text-red-600 text-xs font-semibold">{ errors.tournament_size && 'cant be blank'}</div>
       </div>
 
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Tournament Ratio
+        </label>
+        <input 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="number" 
+          min="0"
+          max="1"
+          step="0.01"
+          name="tournament_ratio"
+          placeholder="Tournament Ratio" 
+          ref={register({ required: true })}
+        />
+        <div className="text-red-600 text-xs font-semibold">{ errors.tournament_ratio && 'cant be blank'}</div>
+      </div>
+
       <button 
         type="submit"
         className="appearance-none bg-blue-700 text-lg text-white p-2 mt-3">save</button>
@@ -142,7 +159,8 @@ function Content () {
               prob_crossover: parseFloat(data.prob_crossover),
               tournament_size: parseInt(data.tournament_size),
               pop_size: parseInt(data.pop_size),
-              convergence_threshold: parseFloat(data.convergence_threshold)
+              convergence_threshold: parseFloat(data.convergence_threshold),
+              tournament_ratio: parseFloat(data.tournament_ratio)
             }
           })
         }}

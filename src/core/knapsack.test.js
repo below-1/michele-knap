@@ -43,12 +43,12 @@ test('knapsack must works correctly', () => {
     use_convergence_threshold: true
   }
 
-  const result = knapsack({
-    items,
-    hyper,
-    event_cb: (foo) => {
-      console.log(foo)
-    },
-    mutation: spx
-  })
+  // const result = knapsack({
+  //   items,
+  //   hyper,
+  //   event_cb: (foo) => {
+  //     console.log(foo)
+  //   },
+  //   mutation: spx
+  // })
 })

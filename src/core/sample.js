@@ -21,7 +21,7 @@ export function sample(population, k){
         selections (the pool) in a list or previous selections in a set.
 
         When the number of selections is small compared to the
-        population, then tracking selections is efficient, requiring
+        population, wthen tracking selections is efficient, requiring
         only a small set and an occasional reselection.  For
         a larger number of selections, the pool tracking method is
         preferred since the list takes less space than the

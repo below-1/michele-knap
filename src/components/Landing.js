@@ -9,14 +9,14 @@ export default function Landing () {
         <div className="text-lg tracking-widest font-bold">MICHELE'S KNAPSACK</div>
         <div className="flex flex-grow flex-row justify-end">
           <Link className="px-6 font-bold" to='/about'>About</Link>
-          <Link className="px-6 font-bold" to='/dev'>Try It!</Link>
+          <Link className="px-6 font-bold" to='/dev/input'>Try It!</Link>
         </div>
       </div>
 
       <div className="content">
         <section className="hero w-screen h-full flex flex-col items-center justify-center">
           <div className="text-white font-bold text-4xl">Knapsack Problem meets Genetic Algorithm</div>
-          <Link to="/dev" className="bg-blue-700 text-white px-8 py-3 font-bold text-xl rounded">Get Started!</Link>
+          <Link to="/dev/input" className="bg-blue-700 text-white px-8 py-3 font-bold text-xl rounded">Get Started!</Link>
         </section>
       </div>
 

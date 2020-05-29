@@ -14,6 +14,8 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons/faWindowClose'
 import { faCoins } from '@fortawesome/free-solid-svg-icons/faCoins'
 import { faWeightHanging } from '@fortawesome/free-solid-svg-icons/faWeightHanging'
 import { faHourglass } from '@fortawesome/free-solid-svg-icons/faHourglass'
+import { faCompactDisc } from '@fortawesome/free-solid-svg-icons/faCompactDisc'
+import { faMeh } from '@fortawesome/free-solid-svg-icons/faMeh'
 
 library.add(
     faTable, 
@@ -30,5 +32,7 @@ library.add(
     faWindowClose,
     faCoins,
     faWeightHanging,
-    faHourglass
+    faHourglass,
+    faCompactDisc,
+    faMeh
 )

@@ -1,28 +1,12 @@
 import { range, rangeRight, maxBy, minBy, random } from 'lodash'
 import { sample } from './sample'
 import { generate_boundary } from './generate_boundary'
+import { fitness } from './fitness'
 
 function mask({ population, ordered, max_weight, dim }) {
-  return population.map(choromosome => {
-    return choromosome.reduce((acc, cell, index) => {
-      if (cell == 0) {
-        acc.vori[index] = 0
-        return acc
-      }
-      const next_total = acc.total + ordered[index].weight
-      if (next_total > max_weight) {
-        return acc
-      }
-      acc.vori[index] = 1
-      acc.total = next_total
-      acc.tprofit = acc.tprofit + ordered[index].profit
-      return acc
-    }, {
-      total: 0,
-      tprofit: 0,
-      vori: range(dim).map(i => 0)
-    })
-  })
+  return population.map(choromosome => 
+    fitness({ xs: choromosome, ordered, max_weight, dim })
+  )
 }
 
 function convergence ({ masked }) {
@@ -41,7 +25,7 @@ function convergence ({ masked }) {
 function mutate ({ population, dim, pop_size, prob_mutation }) {
   let n = 0
   range(pop_size * dim).forEach(i => {
-    if (Math.random() >= prob_mutation) {
+    if (random() <= prob_mutation) {
       return
     }
     let i_row = Math.floor(i / pop_size)
@@ -68,12 +52,13 @@ export function knapsack ({ items, hyper, mutation }) {
     prob_mutation,
     convergence_threshold,
     use_convergence_threshold,
-    tournament_size
+    tournament_size,
+    tournament_ratio
   } = hyper;
   let gen_counter = 0;
   const dim = items.length
   let population = range(pop_size)
-    .map(i => range(dim).map(j => Math.random() > 0.5 ? 1 : 0))
+    .map(i => range(dim).map(j => random() > 0.5 ? 1 : 0))
   const ordered = items.map((item, index) => {
     return {
       ...item,
@@ -100,25 +85,27 @@ export function knapsack ({ items, hyper, mutation }) {
       break;
     }
 
-
     // Crossover
-    const crossover_pool = population.filter(pop => Math.random() < prob_crossover)
-    mutation(crossover_pool, dim)
+    const crossover_pool = population.filter(pop => random() < prob_crossover)
+    if (crossover_pool.length >= 2) {
+      mutation(crossover_pool, dim)
+    }
 
-    // Mutaation
+    // Mutation
     mutate({ population, dim, pop_size, prob_mutation })
 
+    masked = mask({ population, ordered, max_weight, dim })
     const max_chromosome = maxBy(masked, it => it.tprofit)
     const min_chromosome = minBy(masked, it => it.tprofit)
     const max_chromosome_index = masked.indexOf(max_chromosome)
     const min_chromosome_index = masked.indexOf(min_chromosome)
-
     // Elitisme
     population[min_chromosome_index] = [ ...population[max_chromosome_index] ]
-
     // Tournament
-    const tour_indices = range(pop_size).filter(i => i != min_chromosome_index)
-    // masked = mask({ population, ordered, max_weight, dim })
+    const n_tour = Math.floor(pop_size * tournament_ratio)
+    // console.log(`n_tour: ${n_tour}`)
+    const tour_indices = sample( range(pop_size).filter(i => i != min_chromosome_index), n_tour )
+    // console.log(`tour_indices: ${tour_indices}`)
     tour_indices.forEach(i => {
       const pool = sample(tour_indices, tournament_size)
       const max_index = maxBy(pool, index => masked[index].tprofit)
