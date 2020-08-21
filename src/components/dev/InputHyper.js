@@ -56,7 +56,7 @@ function ContentForm ({ id, submit }) {
       </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
-          Convergence Threshold
+          Convergence Population
         </label>
         <input 
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -72,7 +72,7 @@ function ContentForm ({ id, submit }) {
       </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
-          Crossover Threshold
+          Crossover Probability
         </label>
         <input 
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -89,7 +89,7 @@ function ContentForm ({ id, submit }) {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
-          Mutation Threshold
+          Mutation Probability
         </label>
         <input 
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -119,22 +119,24 @@ function ContentForm ({ id, submit }) {
         <div className="text-red-600 text-xs font-semibold">{ errors.tournament_size && 'cant be blank'}</div>
       </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Tournament Ratio
-        </label>
-        <input 
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="number" 
-          min="0"
-          max="1"
-          step="0.01"
-          name="tournament_ratio"
-          placeholder="Tournament Ratio" 
-          ref={register({ required: true })}
-        />
-        <div className="text-red-600 text-xs font-semibold">{ errors.tournament_ratio && 'cant be blank'}</div>
-      </div>
+      {/* 
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Tournament Ratio
+          </label>
+          <input 
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="number" 
+            min="0"
+            max="1"
+            step="0.01"
+            name="tournament_ratio"
+            placeholder="Tournament Ratio" 
+            ref={register({ required: true })}
+          />
+          <div className="text-red-600 text-xs font-semibold">{ errors.tournament_ratio && 'cant be blank'}</div>
+        </div>
+      */}
 
       <button 
         type="submit"

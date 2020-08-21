@@ -41,7 +41,10 @@ export function knapsack ({ items, hyper, mutation }) {
     generations: [],
     max_chromosome: null,
     best_fit: 0,
-    best_weight: 0
+    worst_fit: 9999999,
+    worst_weight: 0,
+    best_weight: 0,
+    best_gen: 0
   }
 
   const {
@@ -112,9 +115,17 @@ export function knapsack ({ items, hyper, mutation }) {
       population[i] = [...population[max_index]]
     })
 
-    result.max_chromosome = max_chromosome
-    result.best_fit = masked[max_chromosome_index].tprofit
-    result.best_weight = masked[max_chromosome_index].total
+    if (masked[max_chromosome_index].tprofit > result.best_fit) {
+      result.best_gen = gen_counter;
+      result.best_fit = masked[max_chromosome_index].tprofit
+      result.best_weight = masked[max_chromosome_index].total
+      result.max_chromosome = max_chromosome
+    }
+
+    if (masked[max_chromosome_index].tprofit < result.worst_fit) {
+      result.worst_fit = masked[min_chromosome_index].tprofit
+      result.worst_weight = masked[min_chromosome_index].total
+    }
 
     gen_counter += 1
   }

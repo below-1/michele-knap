@@ -10,14 +10,17 @@ export default function CrossoverResult ({
   items,
   label
 }) {
+  const bestGen = result.best_gen
   const bestWeight = result.best_weight
   const bestFit = result.best_fit
+  const worstWeight = result.worst_weight
+  const worstFit = result.worst_fit
   const execTime = result.time
   const maxChromosome = result.max_chromosome.vori
 
   const temp_1 = result.generations.map((gen, index) => {
     return {
-      x: index,
+      x: index + 1,
       y: gen.conv_ratio
     }
   })
@@ -37,25 +40,45 @@ export default function CrossoverResult ({
         </div>
       </div>
       <div className="px-4 grid grid-cols-3 gap-8 mb-8 text-gray-700">
-        <div className="font-semibold text-lg flex items-center py-2 border-b border-gray-300">
-          <FontAwesomeIcon className="mr-2" icon="coins" />
-          <span className="mr-8">Best Profit:</span>
-          <span>{bestFit}</span>
+        <div class="rounded border border-gray-300">
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="coins" />
+            <span className="mr-2">Best Profit:</span>
+            <span>{bestFit}</span>
+          </div>
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="weight-hanging" />
+            <span className="mr-4">Best Weight:</span>
+            <span>{bestWeight}</span>
+          </div>
         </div>
-        <div className="font-semibold text-lg flex items-center py-2 border-b border-gray-300">
-          <FontAwesomeIcon className="mr-2" icon="weight-hanging" />
-          <span className="mr-8">Best Weight:</span>
-          <span>{bestWeight}</span>
+        <div class="rounded border border-gray-300">
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="coins" />
+            <span className="mr-2">Worst Profit:</span>
+            <span>{worstFit}</span>
+          </div>
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="weight-hanging" />
+            <span className="mr-4">Worst Weight:</span>
+            <span>{worstWeight}</span>
+          </div>
         </div>
-        <div className="font-semibold text-lg flex items-center py-2 border-b border-gray-300">
-          <FontAwesomeIcon className="mr-2" icon="hourglass" />
-          <span className="mr-8">Time:</span>
-          <span>{execTime} ms</span>
+        <div class="rounded border border-gray-300">
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="weight-hanging" />
+            <span className="mr-4">Best Generation:</span>
+            <span>{bestGen}</span>
+          </div>
+          <div className="font-semibold text-lg flex items-center p-2 border-b border-gray-300">
+            <FontAwesomeIcon className="mr-2" icon="hourglass" />
+            <span className="mr-8">Time:</span>
+            <span>{execTime} ms</span>
+          </div>
         </div>
       </div>
       <div className="px-4 flex">
         <div className="w-1/3">
-          <div className="text-lg text-gray-600 font-bold">Knapsack</div>
           <div className="grid grid-cols-6 gap-2 py-4">
             {
               maxChromosome.map((cell, index) => (
@@ -72,28 +95,23 @@ export default function CrossoverResult ({
         </div>
 
         <div className="w-2/3 ml-4">
-          <div className="text-lg text-gray-600 font-semibold">Convergence</div>
           <div style={{ height: '400px' }}>
             <ResponsiveLineCanvas
               data={lineChartData}
-              margin={{ top: 28, right: 26, bottom: 28, left: 26 }}
+              margin={{ top: 28, right: 26, bottom: 40, left: 26 }}
               xScale={{ type: 'linear' }}
               yScale={{ type: 'linear', max: 1 }}
               axisLeft={{
-                tickValues: [
-                    0,
-                    0.5,
-                    1
-                ],
+                tickValues: [0, 1],
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'convergence ratio',
+                legend: 'convergence population',
                 legendOffset: 10
               }}
               axisBottom={{
                 legend: 'generation',
-                legendOffset: 10,
+                legendOffset: 30,
                 legendPosition: 'middle'
               }}
             />

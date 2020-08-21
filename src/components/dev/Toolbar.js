@@ -40,6 +40,10 @@ export default function Toolbar () {
     button = (<button 
       className="appearance-none bg-indigo-700 text-white px-4 py-1 text-lg font-bold rounded"
       onClick={() => {
+        if (state.items.length == 0) {
+          alert('Item Kosong. Input Item terlebih dahulu')
+          return
+        }
         dispatch({
           type: 'CLEAR_KNAP_RESULT'
         })
@@ -61,7 +65,6 @@ export default function Toolbar () {
         <span className="text-lg tracking-widest font-bold">MICHELE'S KNAPSACK</span>
       </Link>
       <div className="flex flex-grow flex-row justify-end items-center">
-        <Link className="px-6 font-bold" to='/about'>About</Link>
         <Link className="px-6 font-bold" to='/dev/input'>Input</Link>
         <Link className="px-6 font-bold" to='/dev/result'>Hasil</Link>
         {button}

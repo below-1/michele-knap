@@ -1,7 +1,4 @@
 import { range } from 'lodash'
-import Chance from 'chance'
-
-const chance = new Chance()
 
 const items = [
   { weight: 6, profit: 7 },
@@ -14,7 +11,7 @@ const items = [
 const defState = {
   items,
   hyper: {
-    max_gen: 1000,
+    max_gen: 100,
     tournament_size: 2,
     tournament_ratio: 0.9,
     convergence_threshold: 0.9,

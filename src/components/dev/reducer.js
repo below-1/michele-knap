@@ -1,7 +1,28 @@
+import { range, random } from 'lodash'
+
 export default function Reducer (state, action) {
   let need_save = false
   let next_state;
   switch (action.type) {
+    case 'CLEAR_ITEM':
+      next_state = {
+        ...state,
+        items: []
+      }
+      need_save = true
+      break
+    case 'RANDOM_ITEM':
+      next_state = {
+        ...state,
+        items: range(action.payload.n).map(i => {
+          return {
+            profit: random(action.payload.minProfit, action.payload.maxProfit, false),
+            weight: random(action.payload.minWeight, action.payload.maxWeight, false)
+          }
+        })
+      }
+      need_save = true
+      break
     case 'ADD_ITEM':
       next_state = {
         ...state,
@@ -34,7 +55,10 @@ export default function Reducer (state, action) {
     case 'UPDATE_HYPER':
       next_state = {
         ...state,
-        hyper: action.payload
+        hyper: {
+          ...state.hyper,
+          ...action.payload
+        }
       }
       need_save = true
       break

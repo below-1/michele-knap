@@ -8,7 +8,6 @@ export default function Landing () {
       <div className="navbar bg-white shadow-xl h-20 flex flex-row items-center justify-start px-6 shadow-lg text-gray-700">
         <div className="text-lg tracking-widest font-bold">MICHELE'S KNAPSACK</div>
         <div className="flex flex-grow flex-row justify-end">
-          <Link className="px-6 font-bold" to='/about'>About</Link>
           <Link className="px-6 font-bold" to='/dev/input'>Try It!</Link>
         </div>
       </div>
@@ -26,9 +25,9 @@ export default function Landing () {
 
       <footer className="bg-gray-200 py-6 px-12 flex flex-row items-center justify-between">
         <div className="text-lg tracking-widest font-bold">MICHELE'S KNAPSACK</div>
-        <div className="flex flex-grow flex-row justify-end">
-          <Link className="px-6 font-bold" to='/about'>About</Link>
+        <div className="flex flex-grow flex-row justify-end items-center">
           <Link className="px-6 font-bold" to='/dev'>Try It!</Link>
+          <div className="py-2 px-4 font-semibold">Copyright &#169; Michele 2020</div>
         </div>
       </footer>
     </div>

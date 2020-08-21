@@ -41,7 +41,7 @@ function DevContent () {
       <footer className="bg-gray-200 py-6 px-12 flex flex-row items-center justify-between">
         <div className="text-lg tracking-widest font-bold">MICHELE'S KNAPSACK</div>
         <div className="flex flex-grow flex-row justify-end">
-          <Link className="px-6 font-bold" to='/about'>About</Link>
+          <div className="py-2 px-4 font-semibold">Copyright &#169; Michele 2020</div>
         </div>
       </footer>
     </div>
