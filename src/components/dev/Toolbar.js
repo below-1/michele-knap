@@ -50,6 +50,7 @@ export default function Toolbar () {
         dispatch({
           type: 'KNAP_RUNNING'
         })
+        console.log(state.hyper)
         knapsack(state.items, state.hyper)
       }}
     >

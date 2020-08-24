@@ -162,7 +162,7 @@ function Content () {
               tournament_size: parseInt(data.tournament_size),
               pop_size: parseInt(data.pop_size),
               convergence_threshold: parseFloat(data.convergence_threshold),
-              tournament_ratio: parseFloat(data.tournament_ratio)
+              tournament_ratio: data.tournament_ratio ? parseFloat(data.tournament_ratio) : 0.9
             }
           })
         }}
